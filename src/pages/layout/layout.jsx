@@ -1,11 +1,12 @@
-import Navbar from '../../components/navbar/index'
-import Footer from '../../components/footer/index'
+import Navbar from '../../components/navbar/index';
+import Footer from '../../components/footer/index';
+import './layout.scss';
 
 function Layout({ children }) {
     return (
         <>
             <Navbar />
-            <main>{children}</main>
+            <main className='main bg-dark'>{children}</main>
             <Footer />
         </>
     );

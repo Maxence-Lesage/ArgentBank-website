@@ -1,10 +1,11 @@
 import './index.scss';
-import Layout from '../layout/layout';
+import Layout from '../layout/layout.jsx';
+import SignInForm from '../../components/sign-in-form/index.jsx';
 
 function SignIn() {
     return (
         <Layout>
-            <p>sign-in</p>
+            <SignInForm />
         </Layout>
     );
 }

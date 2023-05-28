@@ -1,5 +1,4 @@
 import './index.scss';
-import imager from "../../images/icon-chat.png";
 
 function Feature(props) {
 

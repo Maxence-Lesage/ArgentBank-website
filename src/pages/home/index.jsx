@@ -1,6 +1,7 @@
 import './index.scss';
 import Layout from '../layout/layout.jsx';
 import Feature from '../../components/feature/index.jsx';
+import Hero from '../../components/hero/index.jsx';
 import IconChat from '../../images/icon-chat.png';
 import IconMoney from '../../images/icon-money.png';
 import IconSecurity from '../../images/icon-security.png';
@@ -15,7 +16,8 @@ function Home() {
 
     return (
         <Layout>
-            <div className="featureContainer">
+            <Hero />
+            <div className="features">
                 <Feature key={featuresItems[0][2]} data={featuresItems[0]} />
                 <Feature key={featuresItems[1][2]} data={featuresItems[1]} />
                 <Feature key={featuresItems[2][2]} data={featuresItems[2]} />

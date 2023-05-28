@@ -1,3 +1,11 @@
-.featureContainer {
+.features {
     display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+@media (min-width: 920px) {
+    .features {
+        flex-direction: row;
+    }
 }
