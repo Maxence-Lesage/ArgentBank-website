@@ -1,36 +1,20 @@
 import './index.scss';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import store from '../../store/index.js';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../../fetch/fetch.js';
 
 function SignInForm() {
 
-    const [tusername, setUsername] = useState('');
-    const [tpassword, setPassword] = useState('');
-    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    async function login(event) {
+    async function sendForm(event) {
         event.preventDefault();
-        const obj = { "email": tusername, "password": tpassword }
-        console.log(tusername, tpassword);
-        const response = await fetch('http://localhost:3001/api/v1/user/login', {
-            method: 'POST',
-            body: JSON.stringify(obj),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        if (response.ok) {
-            const data = await response.json();
-            const token = data.body.token;
-            dispatch({ type: 'signin/login', payload: { token } });
-        } else {
-            console.log("BAD Credentials");
+        const response = await login(email, password);
+        if (response) {
+            navigate('/user', { replace: true });
         }
-
-        setTimeout(() => {
-            console.log(store.getState().login.token);
-        }, 3000);
     }
 
     return (
@@ -41,17 +25,17 @@ function SignInForm() {
                 <div className="input-wrapper">
                     <label htmlFor="username">Username</label>
                     <input type="text" id="username"
-                        value={tusername} onChange={(e) => setUsername(e.target.value)} />
+                        value={email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className="input-wrapper">
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password"
-                        value={tpassword} onChange={(e) => setPassword(e.target.value)} />
+                        value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div className="input-remember">
                     <input type="checkbox" id="remember-me" /><label htmlFor="remember-me">Remember me</label>
                 </div>
-                <button className="sign-in-button" onClick={(e) => login(e)}>Sign In</button>
+                <button className="sign-in-button" onClick={(e) => sendForm(e)}>Sign In</button>
             </form>
         </section>
     );

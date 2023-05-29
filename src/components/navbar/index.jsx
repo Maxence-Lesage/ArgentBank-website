@@ -2,13 +2,16 @@ import './index.scss';
 import image from '../../images/argentBankLogo.png';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import store from '../../store';
 
 function Navbar() {
-    //On stock username dans un state redux, par défaut il vaut Sign In
-    //et on remplace par la suite par le prénom de la personne connecté
-    const username = "Sign In";
-    //IF l'utilisateur est connecté, on affiche Sign Out
+
+    const username = store.getState().profile.profile.firstName || "Sign In";
+    const link = store.getState().login.token ? "/user" : "/sign-in";
+    function logout() {
+        store.dispatch({ type: "user/logout" });
+    }
 
     return (
         <nav className="main-nav">
@@ -22,11 +25,17 @@ function Navbar() {
                     <h1 className="sr-only">Argent Bank</h1>
                 </div>
             </Link>
-            <div>
-                <Link to={"/sign-in"}>
+            <div className='links'>
+                <Link to={link}>
                     <div className="main-nav-item">
-                        <FontAwesomeIcon icon={faCircleUser} />
+                        <FontAwesomeIcon className='userIcon' icon={faCircleUser} />
                         <span>{username}</span>
+                    </div>
+                </Link>
+                <Link to={"/"} onClick={logout}>
+                    <div className="main-nav-item">
+                        <FontAwesomeIcon className='userIcon' icon={faRightFromBracket} />
+                        Sign Out
                     </div>
                 </Link>
             </div>
