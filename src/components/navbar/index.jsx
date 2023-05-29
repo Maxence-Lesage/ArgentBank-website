@@ -12,6 +12,12 @@ function Navbar() {
     function logout() {
         store.dispatch({ type: "user/logout" });
     }
+    const logoutLink = store.getState().login.token && <Link to={"/"} onClick={logout}>
+        <div className="main-nav-item">
+            <FontAwesomeIcon className='userIcon' icon={faRightFromBracket} />
+            Sign Out
+        </div>
+    </Link>;
 
     return (
         <nav className="main-nav">
@@ -32,12 +38,7 @@ function Navbar() {
                         <span>{username}</span>
                     </div>
                 </Link>
-                <Link to={"/"} onClick={logout}>
-                    <div className="main-nav-item">
-                        <FontAwesomeIcon className='userIcon' icon={faRightFromBracket} />
-                        Sign Out
-                    </div>
-                </Link>
+                {logoutLink}
             </div>
         </nav>
     )
