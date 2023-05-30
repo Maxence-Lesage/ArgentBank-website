@@ -1,19 +1,28 @@
 import './index.scss';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../../fetch/fetch.js';
+import { loginFetch, profileFetch } from '../../fetch/fetch.js';
+import store from '../../store';
+import { logoutReducer } from '../../store';
 
 function SignInForm() {
 
+    //Good
     const navigate = useNavigate()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    //Good
     async function sendForm(event) {
         event.preventDefault();
-        const response = await login(email, password);
-        if (response) {
-            navigate('/user', { replace: true });
+        const isLogged = await loginFetch(email, password);
+        if (isLogged) {
+            const hasProfile = await profileFetch();
+            if (hasProfile) {
+                navigate('/profile', { replace: true });
+            } else {
+                store.dispatch(logoutReducer());
+            }
         }
     }
 

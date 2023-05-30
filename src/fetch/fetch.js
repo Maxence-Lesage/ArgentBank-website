@@ -1,6 +1,7 @@
 import store from '../store/index.js';
+import { loginReducer, profileReducer } from '../store/index.js';
 
-export async function login(email, password) {
+export async function loginFetch(email, password) {
     const obj = { "email": email, "password": password }
     const response = await fetch('http://localhost:3001/api/v1/user/login', {
         method: 'POST',
@@ -12,7 +13,7 @@ export async function login(email, password) {
     if (response.ok) {
         const data = await response.json();
         const token = data.body.token;
-        store.dispatch({ type: 'signin/login', payload: { token } });
+        store.dispatch(loginReducer({ token }));
         return true;
     } else {
         console.log("BAD Credentials");
@@ -20,8 +21,8 @@ export async function login(email, password) {
     }
 }
 
-export async function loadProfile() {
-    const token = store.getState().login.token;
+export async function profileFetch() {
+    const token = store.getState().token;
     const response = await fetch('http://localhost:3001/api/v1/user/profile', {
         method: 'POST',
         headers: {
@@ -32,7 +33,7 @@ export async function loadProfile() {
     if (response.ok) {
         const data = await response.json();
         const profile = data.body;
-        store.dispatch({ type: 'user/profile', payload: { profile } });
+        store.dispatch(profileReducer({ profile }));
         return true;
     } else {
         return false;

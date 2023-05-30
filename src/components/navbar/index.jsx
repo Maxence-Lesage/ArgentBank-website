@@ -3,16 +3,18 @@ import image from '../../images/argentBankLogo.png';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import store from '../../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutReducer } from '../../store';
 
 function Navbar() {
 
-    const username = store.getState().profile.profile.firstName || "Sign In";
-    const link = store.getState().login.token ? "/user" : "/sign-in";
+    const dispatch = useDispatch();
+    const username = useSelector(state => state.profile.firstName) || "Sign In";
+    const link = useSelector(state => state.token) ? "/profile" : "/sign-in";
     function logout() {
-        store.dispatch({ type: "user/logout" });
+        dispatch(logoutReducer());
     }
-    const logoutLink = store.getState().login.token && <Link to={"/"} onClick={logout}>
+    const logoutLink = useSelector(state => state.token) && <Link to={"/"} onClick={logout}>
         <div className="main-nav-item">
             <FontAwesomeIcon className='userIcon' icon={faRightFromBracket} />
             Sign Out
