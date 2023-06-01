@@ -9,6 +9,67 @@ basePath: /api/v1
 schemes:
   - http
 paths:
+  /user/transactions:
+    get:
+      tags:
+        - Transactions
+      summary: User Transactions
+      description: API for getting user transactions
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successfully Fetching User Transactions
+          schema:
+            $ref: '#/definitions/TransactionsData'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Servor Error
+  /user/transactions/category:
+    put:
+      tags:
+        - Transactions
+      summary: Transaction category update
+      description: API for updating transaction's category
+      parameters:
+        - in: body
+          name: body
+          description: Update Category Attributes
+          required: true
+          schema:
+            $ref: '#/definitions/CategoryUpdate'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successfully Updating Transaction Category
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Servor Error  
+  /user/transactions/note:
+    put:
+      tags:
+        - Transactions
+      summary: Transaction notes update
+      description: API for updating transaction's notes
+      parameters:
+        - in: body
+          name: body
+          description: Update Note Attributes
+          required: true
+          schema:
+            $ref: '#/definitions/NoteUpdate'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successfully Updating Transaction Note
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Servor Error                  
   /user/login:
     post:
       tags:
@@ -155,4 +216,25 @@ definitions:
     type: object
     properties:
       userName:
+        type: string
+  TransactionsData:
+    type: object
+    properties:
+      transactionsId:
+        type: integer
+      data:
+        type: object
+  CategoryUpdate:
+    type: object
+    properties:
+      transactionsId:
+        type: integer
+      category:
+        type: string
+  NoteUpdate:
+    type: object
+    properties:
+      transactionsId:
+        type: integer
+      note:
         type: string
