@@ -39,3 +39,22 @@ export async function profileFetch() {
         return false;
     }
 }
+
+export async function updateUserNameFetch(username) {
+    const token = store.getState().token;
+    const obj = { "userName": username };
+    const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+        method: 'PUT',
+        body: JSON.stringify(obj),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    });
+    if (response.ok) {
+        profileFetch();
+        return true;
+    } else {
+        return false;
+    }
+}
