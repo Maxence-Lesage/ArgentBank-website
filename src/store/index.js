@@ -29,5 +29,3 @@ const store = configureStore({
 });
 
 export default store;
-
-//store.subscribe(() => console.log(store.getState()));

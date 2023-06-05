@@ -9,7 +9,7 @@ import { logoutReducer } from '../../store';
 function Navbar() {
 
     const dispatch = useDispatch();
-    const username = useSelector(state => state.profile.firstName) || "Sign In";
+    const username = useSelector(state => state.profile.userName) || "Sign In";
     const link = useSelector(state => state.token) ? "/profile" : "/sign-in";
     function logout() {
         dispatch(logoutReducer());
