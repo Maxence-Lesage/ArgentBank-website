@@ -1,22 +1,22 @@
 import './index.scss'
 import { updateUserNameFetch } from '../../fetch/fetch.js';
 
-function EditName(props) {
+function EditName({ updateState, data }) {
 
-    const userName = props.data.userName;
-    const firstName = props.data.firstName;
-    const lastName = props.data.lastName;
+    const userName = data.userName;
+    const firstName = data.firstName;
+    const lastName = data.lastName;
 
     function cancelClick(event) {
         event.preventDefault();
-        props.updateState(false);
+        updateState(false);
     }
 
     function saveClick(event) {
         event.preventDefault();
         const userNameValue = document.getElementById('editNameForm_userName').value;
         updateUserNameFetch(userNameValue);
-        props.updateState(false);
+        updateState(false);
     }
 
     return (

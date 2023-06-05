@@ -21,16 +21,12 @@ function User() {
         ["Argent Bank Credit Card (x8349)", "$184.30", "Current Balance"]
     ];
 
-    const updateState = (newState) => {
-        setEditName(newState);
-    };
-
     return (
         <Layout>
             {editName === false ?
-                <UserHeader updateState={updateState} firstName={data.firstName} lastName={data.lastName} />
+                <UserHeader updateState={setEditName} firstName={data.firstName} lastName={data.lastName} />
                 :
-                <EditName updateState={updateState} data={data} />
+                <EditName updateState={setEditName} data={data} />
             }
             <Transaction key="1" data={transacData[0]} />
             <Transaction key="2" data={transacData[1]} />
