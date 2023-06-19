@@ -11,9 +11,11 @@ function User() {
     const navigate = useNavigate();
     const [editName, setEditName] = useState(false);
     const data = useSelector(state => state.profile);
+    const token = useSelector(state => state.token);
+
     useEffect(() => {
-        if (!data.firstName || !data.lastName) navigate('/', { replace: true });
-    }, [data.firstName, data.lastName, navigate]);
+        if (!token) navigate('/', { replace: true });
+    }, [token, navigate]);
 
     const transacData = [
         ["Argent Bank Checking (x8349)", "$2,082.79", "Available Balance"],

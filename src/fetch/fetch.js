@@ -3,7 +3,7 @@ import { loginReducer, profileReducer } from '../store/index.js';
 
 export async function loginFetch(email, password) {
     const obj = { "email": email, "password": password }
-    const response = await fetch('http://localhost:3001/api/v1/user/login', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/user/login`, {
         method: 'POST',
         body: JSON.stringify(obj),
         headers: {
@@ -23,7 +23,7 @@ export async function loginFetch(email, password) {
 
 export async function profileFetch() {
     const token = store.getState().token;
-    const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/user/profile`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ export async function profileFetch() {
 export async function updateUserNameFetch(username) {
     const token = store.getState().token;
     const obj = { "userName": username };
-    const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/user/profile`, {
         method: 'PUT',
         body: JSON.stringify(obj),
         headers: {
