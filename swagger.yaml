@@ -28,7 +28,7 @@ paths:
           description: Bad Request
         '500':
           description: Internal Servor Error
-  /user/transactions/id:
+  /user/transactions/{id}:
     get:
       security:
         - Bearer: []
@@ -47,7 +47,7 @@ paths:
           description: Bad Request
         '500':
           description: Internal Servor Error
-  /user/transactions/id/category:
+  /user/transactions/{id}/category:
     put:
       security:
         - Bearer: []
@@ -71,7 +71,7 @@ paths:
           description: Bad Request
         '500':
           description: Internal Servor Error  
-  /user/transactions/id/note:
+  /user/transactions/{id}/note:
     put:
       security:
         - Bearer: []
